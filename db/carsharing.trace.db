@@ -1,0 +1,21 @@
+2023-05-04 22:30:09 jdbc[9]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CUSTOMERS" not found; SQL statement:
+select * from car where company_id = 1 and id != (select rented_car_id  from customers where rented_car_id != null); [42102-200]
+2023-05-04 22:33:08 jdbc[9]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM CAR WHERE COMPANY_ID = %[*]D AND  ID NOT IN ( 
+                             SELECT RENTED_CAR_ID 
+                             FROM CUSTOMER 
+                             WHERE RENTED_CAR_ID IS NOT NULL)"; expected "ALL, ANY, SOME"; SQL statement:
+select * from car where company_id = %d and  ID NOT IN ( 
+                             SELECT RENTED_CAR_ID 
+                             FROM CUSTOMER 
+                             WHERE RENTED_CAR_ID IS NOT NULL) [42001-200]
+2023-05-04 22:36:15 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM CAR WHERE COMPANY_ID = %[*]D AND  ID NOT IN ( 
+                             SELECT RENTED_CAR_ID 
+                             FROM CUSTOMER 
+                             WHERE RENTED_CAR_ID IS NOT NULL)"; expected "ALL, ANY, SOME"; SQL statement:
+select * from car where company_id = %d and  ID NOT IN ( 
+                             SELECT RENTED_CAR_ID 
+                             FROM CUSTOMER 
+                             WHERE RENTED_CAR_ID IS NOT NULL) [42001-200]
