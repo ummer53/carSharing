@@ -1,19 +1,16 @@
 package carsharing;
 
-import java.sql.Connection;
+
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class Company implements General{
     Integer id = null;
     String name = null;
-    private Connection conn = Main.conn;
-    private Statement stmt = Main.stmt;
+
     private String sql;
-    private Scanner scanner = new Scanner(System.in);
 
     public Company(Integer id, String name) {
         this.id = id;
@@ -43,9 +40,7 @@ public class Company implements General{
                     hm.put(resultSet.getInt("id"), resultSet.getString("name"));
                 }
                 System.out.println("Choose the company:");
-                for (Object i : hm.keySet()) {
-                    System.out.println(i + ". " + hm.get(i));
-                }
+                hm.forEach((K,V) -> System.out.println(K + ". " + V));   // displays company list
                 System.out.println("0. Back");
 
             } else {
@@ -63,7 +58,6 @@ public class Company implements General{
         try {
             stmt.execute(createCompany);
             System.out.println("The company was created!");
-            System.out.println();
         } catch (SQLException se) {
             se.printStackTrace();
         }
@@ -100,20 +94,17 @@ public class Company implements General{
     }
 
     public int getCompanyID(String choice) {
-        if (choice.matches("\\d+"))
-            sql = "select id from company where id = %d".formatted(Integer.parseInt(choice));
-        else
-            sql = "select id from company where name = \'%s\'".formatted(choice);
-        int i = 0;
+        sql = (choice.matches("\\d+") ? "select id from company where id = %d".formatted(Integer.parseInt(choice)) :
+             "select id from company where name = \'%s\'".formatted(choice));
         try {
             ResultSet set = stmt.executeQuery(sql);
             while (set.next()) {
-                i = set.getInt("id");
+                return  set.getInt("id");
             }
         } catch (SQLException se) {
             se.printStackTrace();
         }
 
-        return i;
+        return 0;
     }
 }

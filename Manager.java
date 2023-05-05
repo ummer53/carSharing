@@ -1,16 +1,9 @@
 package carsharing;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.HashMap;
-import java.util.Scanner;
+
 
 public class Manager implements General{
-    private Scanner scanner = new Scanner(System.in);
-    private Connection conn = Main.conn;
-    private Statement stmt = Main.stmt;
+
     public Manager() {
     }
 

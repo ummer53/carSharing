@@ -5,7 +5,6 @@ import java.sql.*;
 
 public class Main {
 
-    static int companyCount = 0;
     static Connection conn = null;
     static Statement stmt = null;
 
