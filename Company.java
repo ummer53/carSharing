@@ -1,6 +1,6 @@
 package carsharing;
 
-public class Company {
+ public class Company {
     Integer id = null;
     String name = null;
 
