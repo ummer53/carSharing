@@ -5,7 +5,6 @@ import java.sql.*;
 
 public class Main {
 
-    static int companyCount = 0;
     static Connection conn = null;
     static Statement stmt = null;
 
@@ -34,24 +33,24 @@ public class Main {
             String  sql;
 
             stmt = conn.createStatement();
-            sql = "DROP TABLE IF EXISTS customer";
-            stmt.executeUpdate(sql);
-            sql =  "DROP TABLE IF EXISTS car";
-            stmt.executeUpdate(sql);
-            sql = "DROP TABLE IF EXISTS COMPANY";
-            stmt.executeUpdate(sql);
+//            sql = "DROP TABLE IF EXISTS customer";
+//            stmt.executeUpdate(sql);
+//            sql =  "DROP TABLE IF EXISTS car";
+//            stmt.executeUpdate(sql);
+//            sql = "DROP TABLE IF EXISTS COMPANY";
+//            stmt.executeUpdate(sql);
 
 
-            sql = "CREATE TABLE COMPANY (ID bigint auto_increment(1,1), " +
+            sql = "CREATE TABLE if not exists COMPANY (ID bigint auto_increment(1,1), " +
                     "NAME VARCHAR(255) unique not null , PRIMARY KEY ( id ))";
             stmt.executeUpdate(sql);
-            sql = "CREATE TABLE car (ID bigint auto_increment(1,1), " +
+            sql = "CREATE TABLE if not exists car (ID bigint auto_increment(1,1), " +
                     "NAME VARCHAR(255) unique not null , PRIMARY KEY ( id )," +
                     "company_id int not null ," +
                     "constraint fk_company_id foreign key (company_id)" +
                     "references company( id))";
             stmt.executeUpdate(sql);
-            sql = "CREATE TABLE customer (ID bigint auto_increment(1,1), " +
+            sql = "CREATE TABLE if not exists customer (ID bigint auto_increment(1,1), " +
                     "NAME VARCHAR(255) unique not null , PRIMARY KEY ( id )," +
                     "rented_car_id int," +
                     "constraint fk_rented_car foreign key (rented_car_id)" +
@@ -66,6 +65,7 @@ public class Main {
         } catch(Exception e) {
             e.printStackTrace(); //Handle errors for Class.forName
         }
-        CreateCompany company = new CreateCompany();
+        Run run = new Run();
+
     }
 }
